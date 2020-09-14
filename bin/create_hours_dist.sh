@@ -10,7 +10,7 @@ echo >> TEMP.txt
 find . -name "failed_login_data.txt" -print0 | xargs -0 awk '{ print $3 }' | sort | uniq -c >> TEMP.txt
 
 #Takes the earlier output and creates a new line using the variables defined in awk and puts the output into a file.
-awk 'NF {print "data.addRow([\047" $2"\047, " $1"]);"}' TEMP.txt >> TEMP1.txt).
+awk 'NF {print "data.addRow([\047" $2"\047, " $1"]);"}' TEMP.txt >> TEMP1.txt)
 
 #Wrap temp file contents in html and create html file
 ./bin/wrap_contents.sh "$DIR"/TEMP1.txt html_components/"$FILE" "$FILE".html
