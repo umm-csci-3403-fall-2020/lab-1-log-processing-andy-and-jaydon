@@ -2,6 +2,7 @@
 DIR="$1"
 FILE="country_dist"
 (cd "$DIR" || exit
+# shellcheck disable=SC2016
 find . -name "failed_login_data.txt" -print0 | xargs -0 awk '{ print $5 }' | sort | tee TMP #Grabs text from all files in directory that match the pattern, then sorts it and puts the names into their own lines, then counts the times each name is found and puts it in a file
 join TMP ../etc/country_IP_map.txt | tee TMP1 #Takes the file with just the IPs in it and joins the country to the IP using the map file
 awk '{ print $2 }' TMP1 | sort | uniq -c | tee TMP2 #Takes the countries column, sorts it, and then counts the duplicates and prints it to a file
